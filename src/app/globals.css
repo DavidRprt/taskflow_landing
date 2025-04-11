@@ -1,26 +1,230 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --shadow-400: inset 0px 2px 4px 0 rgba(255, 255, 255, 0.05);
+  --shadow-500: 0px 16px 24px rgba(0, 0, 0, 0.25),
+    0px -14px 48px rgba(40, 51, 111, 0.7);
+
+  --color-primary-1: #E6F4F2;
+  --color-primary-2: #7EB9A4;
+  --color-primary-3: #7EB9A4;
+  --color-primary-4: #eaedff;
+  --color-primary-5: #E6F4F2;
+
+  --color-secondary-1: #080d27;
+  --color-secondary-2: #0c1838;
+  --color-secondary-3: #334679;
+  --color-secondary-4: #1959ad;
+  --color-secondary-5: #263466;
+
+  --color-gradient-1-from: #1b275a;
+  --color-gradient-1-to: #0e1434;
+  --color-gradient-2-from: #334679;
+  --color-gradient-2-to: #162561;
+  --color-gradient-g3-from: rgba(196, 203, 245, 0.5);
+  --color-gradient-glow: #2ef2ff;
+
+  --color-black: #000000;
+  --color-black-100: #05091d;
+
+  --shadow-color-light: rgba(255, 255, 255, 0.05);
+  --shadow-color-heavy-1: rgba(0, 0, 0, 0.25);
+  --shadow-color-heavy-2: rgba(40, 51, 111, 0.7);
+
+  --shadow-400: inset 0px 2px 4px 0 var(--shadow-color-light);
+  --shadow-500: 0px 16px 24px var(--shadow-color-heavy-1),
+    0px -14px 48px var(--shadow-color-heavy-2);
+
+  --font-inter: "Inter", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+
+  --transition-borderColor: border-color;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    @apply bg-secondary-1;
+  }
+
+  body {
+    @apply font-poppins text-[16px] tracking-[-0.03em] text-primary-5;
+  }
+
+  a {
+    @apply no-underline;
+  }
+
+  img {
+    @apply block max-w-full;
+  }
+
+  button {
+    @apply bg-none tracking-[-0.03em];
+  }
+
+  input {
+    @apply tracking-[-0.03em];
   }
 }
 
+@layer utilities {
+  .h-num {
+    @apply font-inter text-[72px] font-bold leading-[84px];
+  }
+
+  .h1 {
+    @apply text-[84px] font-black leading-[84px] tracking-[-0.03em];
+  }
+
+  .h2 {
+    @apply text-[64px] font-black leading-[64px];
+  }
+
+  .h3 {
+    @apply text-[48px] font-semibold leading-[56px] tracking-[-0.02em];
+  }
+
+  .h4 {
+    @apply text-[40px] font-semibold leading-[52px];
+  }
+
+  .h5 {
+    @apply text-[32px] font-semibold leading-[40px];
+  }
+
+  .h6 {
+    @apply text-[24px] font-medium leading-[36px];
+  }
+
+  .body-1 {
+    @apply text-[22px] leading-[36px];
+  }
+  .body-2 {
+    @apply text-[18px] font-semibold leading-[32px];
+  }
+
+  .body-3 {
+    @apply text-[16px] leading-[28px] tracking-[0.02em];
+  }
+
+  .base {
+    @apply text-[16px] font-medium leading-[24px] tracking-[0.03em];
+  }
+
+  .base-bold {
+    @apply text-[16px] font-bold leading-[24px];
+  }
+
+  .base-small {
+    @apply text-[14px] font-semibold leading-[18px] tracking-[0.03em];
+  }
+
+  .small-1 {
+    @apply text-[14px] font-semibold leading-[18px] tracking-[0.03em];
+  }
+
+  .small-2 {
+    @apply text-[12px] font-bold leading-[16px] tracking-[0.3em];
+  }
+
+  .small-compact {
+    @apply text-[12px] font-semibold leading-[18px] tracking-[0.03em];
+  }
+
+  /* START of Common */
+  .container {
+    @apply mx-auto max-w-[1252px] px-16 max-xl:px-10 max-lg:px-6 max-sm:px-4;
+  }
+
+  .caption {
+    @apply text-[12px] font-bold leading-[16px] tracking-[0.3em] mb-5 uppercase text-primary-3;
+  }
+
+  .scroll-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* END of Common */
+
+  .nav-active {
+  @apply text-primary-2;
+}
+  /*START of Custom Button*/
+  .inner-before {
+    @apply before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-500 before:content-[''];
+  }
+
+  .inner-before::before {
+    background: linear-gradient(
+      var(--color-gradient-1-from),
+      var(--color-gradient-1-to)
+    );
+  }
+
+  .glow-before {
+    @apply before:absolute before:left-2/5 before:top-0 before:z-4 before:h-0.5 before:w-3/5 before:opacity-0 before:transition-all before:duration-500 before:content-[''] group-hover:before:left-4 group-hover:before:opacity-40;
+  }
+
+  .glow-before::before {
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-gradient-glow),
+      transparent
+    );
+  }
+
+  .glow-after {
+    @apply after:absolute after:bottom-0 after:left-4 after:z-4 after:h-0.5 after:w-7/20 after:opacity-0 after:transition-all after:duration-500 after:content-[''] group-hover:after:left-3/5 group-hover:after:opacity-40;
+  }
+
+  .glow-after::after {
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-gradient-glow),
+      transparent
+    );
+  }
+
+  /*END of Custom Button*/
+  /* START of Feature */
+  .feature-after {
+    @apply after:absolute after:right-0 after:top-0 after:h-full after:w-1/2 after:mix-blend-soft-light after:content-[''] max-md:after:hidden;
+  }
+
+  .feature-after::after {
+    background: linear-gradient(var(--color-gradient-g3-from), transparent);
+  }
+}
+/* END of Feature */
+/* START of Pricing */
+
+.pricing-plan_first {
+  @apply first:rounded-bl-3xl first:rounded-tl-3xl lg:first:border-r-0;
+}
+
+.pricing-plan_last {
+  @apply last:rounded-br-3xl last:rounded-tr-3xl lg:last:border-l-0;
+}
+
+.pricing-plan_odd {
+  @apply odd:border-secondary-3 odd:bg-secondary-1 lg:odd:mt-12;
+}
+
+.pricing-plan_even {
+  @apply even:rounded-bl-3xl even:rounded-br-3xl even:rounded-tl-3xl even:rounded-tr-3xl even:border-secondary-4;
+}
+
+/* END of Pricing */
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), var(--font-inter), sans-serif;
 }
